@@ -875,6 +875,14 @@
                     📧 Abrir en Outlook
                 </button>
             </div>
+            <div class="text-center mt-3">
+                <p style="font-size: 14px; color: #666; margin-bottom: 10px;">
+                    <strong>Alternativa para móviles:</strong> Si las apps no se abren correctamente, puedes copiar el texto formateado
+                </p>
+                <button id="copyHTMLBtn" class="btn btn-secondary">
+                    📋 Copiar HTML Formateado
+                </button>
+            </div>
         </div>
 
         <!-- Navegación -->
@@ -900,6 +908,7 @@
         const GMAIL_BTN = document.getElementById('gmailBtn');
         const OUTLOOK_BTN = document.getElementById('outlookBtn');
         const COPY_BTN = document.getElementById('btn-copy');
+        const COPY_HTML_BTN = document.getElementById('copyHTMLBtn');
         
         let currentStep = 0;
 
@@ -1196,6 +1205,105 @@ ${formData.nombre}`;
         }
 
         /**
+         * Genera contenido HTML optimizado para aplicaciones móviles
+         */
+        function generateMobileHTMLContent() {
+            // Determinar saludo según la hora
+            const now = new Date();
+            const hour = now.getHours();
+            let greeting = "Hola"; // Valor por defecto
+            
+            if (hour >= 6 && hour < 14) {
+                greeting = "Buenos días";
+            } else if (hour >= 14 && hour < 21) {
+                greeting = "Buenas tardes";
+            } else {
+                greeting = "Hola";
+            }
+            
+            const formData = {
+                nombre: document.getElementById('userName').value,
+                dni: document.getElementById('userDNI').value,
+                email: document.getElementById('userEmail').value,
+                telefono: document.getElementById('userPhone').value,
+                fecha: document.getElementById('userDate').value
+            };
+            
+            // Usar formato más compatible con apps móviles
+            return `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .bold { font-weight: bold; }
+        .greeting { font-weight: bold; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <p class="greeting">${greeting}</p>
+    <p>Con motivo de la Consulta Pública sobre el Proyecto de Real Decreto por el que se establece el título de Especialista en Genética de Laboratorio, me gustaría hacer las siguientes alegaciones:</p>
+    
+    <p class="bold">ESCRITO DE APORTACIÓN AL TRÁMITE DE CONSULTA PÚBLICA PREVIA</p>
+    
+    <p><span class="bold">Asunto:</span> Aportaciones al procedimiento de consulta pública previa para la creación de la especialidad en Genética de Laboratorio.</p>
+    
+    <p><span class="bold">Persona remitente:</span><br>
+    <span class="bold">NOMBRE COMPLETO:</span><br>
+    ${formData.nombre}<br>
+    <span class="bold">DNI/NIE:</span><br>
+    ${formData.dni}<br>
+    <span class="bold">Correo electrónico de contacto:</span><br>
+    ${formData.email}<br>
+    ${formData.telefono ? `<span class="bold">Teléfono de contacto:</span><br>${formData.telefono}<br>` : ''}</p>
+    
+    <p><span class="bold">Órgano destinatario:</span><br>
+    Dirección General de Ordenación Profesional<br>
+    Ministerio de Sanidad</p>
+    
+    <p><span class="bold">Fecha:</span><br>
+    ${formData.fecha}</p>
+    
+    <p><span class="bold">EXPONE:</span></p>
+    
+    <p>Que, en relación con el trámite de consulta pública previa para la elaboración de la norma por la que se crea la especialidad en Genética de Laboratorio en el ámbito de las Ciencias de la Salud, con acceso desde los títulos que habilitan para el ejercicio de la Medicina, la Biología y afines como Farmacia, Química y Veterinaria en España, desea realizar las siguientes <span class="bold">aportaciones y observaciones</span>.</p>
+    
+    <p class="bold">PROPUESTA DE MODIFICACIÓN: INCLUSIÓN DEL GRADO EN BIOQUÍMICA COMO TÍTULO HABILITANTE</p>
+    
+    <p>Solicito la <span class="bold">inclusión expresa del título de Grado en Bioquímica</span>, entre los títulos universitarios que habiliten el acceso a la futura especialidad en Genética de Laboratorio, y no contemplarlo como actualmente está en el término "<span class="bold">Biología y afines</span>" por las siguientes razones y fundamentos normativos:</p>
+    
+    <p class="bold">1. Adecuación de la titulación de Bioquímica a los fines de la especialidad</p>
+    
+    <p>El Grado en Bioquímica proporciona una sólida formación en áreas esenciales en genética clínica al proporcionar competencia en biología molecular, bioinformática, biotecnología, la bioquímica clínica y el análisis de laboratorio, competencias absolutamente relevantes y necesarias para el ejercicio profesional en la Genética de Laboratorio, como así queda reflejado en el <span class="bold">Real Decreto 1393/2007</span>, que regula la ordenación de las enseñanzas universitarias oficiales, y donde se contempla en el Grado en Bioquímica una formación transversal en genética, diagnóstico molecular, biomedicina y técnicas de laboratorio altamente especializadas, elementos todos ellos coherentes con los objetivos y competencias propias de la especialidad propuesta.</p>
+    
+    <p class="bold">2. Marco normativo aplicable a las profesiones sanitarias</p>
+    
+    <p>• <span class="bold">Real Decreto 1163/2002, de 8 noviembre, por el que se crean y regulan las especialidades sanitarias para químicos, biólogos y bioquímicos.</span></p>
+    
+    <p>• <span class="bold">Ley 44/2003, de 21 de noviembre, de ordenación de las profesiones sanitarias (LOPS)</span>: El artículo 2 reconoce como profesiones del ámbito sanitario, además de las reguladas, aquellas que participan en actividades sanitarias relevantes, como ocurre con la Bioquímica en el ámbito del diagnóstico molecular y genético.</p>
+    
+    <p>• <span class="bold">Real Decreto 183/2008, de 8 de febrero</span>, por el que se determinan y clasifican las especialidades en Ciencias de la Salud, que pueden acceder a las pruebas selectivas para el acceso a plazas de formación sanitara: médicos, farmacéuticos, <span class="bold">químicos, biólogos, bioquímicos</span>, psicólogos y radiofísicos hospitalarios. Asímismo en el apartado 5 del anexo I quedan reflejadas los títulos universitarios oficiales de Grado que pueden acceder a las especialidades sanitarias de Análisis Clínicos, Bioquímica Clínica, Inmunología, Microbiología y Parasitología, y Radiofarmacia; en las que la <span class="bold">licenciatura de Bioquímica queda incluida expresamente</span>.</p>
+    
+    <p>• <span class="bold">Real Decreto 101/2025, de 18 de febrero, por el que se establece el título de especialista en Laboratorio Clínico</span>, en donde se modifica el apartado 5 del anexo I anteriormente mencionado, de acceso a la especialidad de Laboratorio Clínico por parte de los títulos universitarios oficiales de Grado en Biología, Bioquímica, Farmacia, Medicina o Química.</p>
+    
+    <p class="bold">3. Principio de igualdad y no discriminación</p>
+    
+    <p>La exclusión del título de Bioquímica de forma injustificada podría resultar contraria al <span class="bold">principio de igualdad del artículo 14 de la Constitución Española</span>, así como al derecho a acceder en condiciones de igualdad a las funciones y cargos públicos, de acuerdo con el <span class="bold">artículo 23.2 CE</span>. No existe justificación técnica, académica ni normativa que fundamente la exclusión de esta titulación respecto a otras afines. La no inclusión específica del título de Bioquímica dejándose a la interpretación libre de cada administración mediante el epígrafe de "afines", ha dado lugar a distintas dificultades administrativas en el acceso de estos licenciados a las distintas convocatorias públicas.</p>
+    
+    <p class="bold">CONCLUSIÓN Y PROPUESTA FINAL:</p>
+    
+    <p>Por todo lo anterior, se propone modificar el texto preliminar del anteproyecto o futura norma para que en el apartado de titulaciones que habilitan el acceso a la especialidad de Genética de Laboratorio se <span class="bold">incluya expresamente el Grado en Bioquímica</span>, junto con los demás títulos, por lo que el listado final contenga los títulos de Medicina, Bioquímica, Biología, Farmacia, Química y Veterinaria.</p>
+    
+    <p class="bold">Sin otro particular, agradezco la atención prestada y solicito que esta aportación sea tenida en cuenta en el proceso de elaboración normativa.</p>
+    
+    <p>Atentamente,</p>
+    
+    <p class="bold">${formData.nombre}</p>
+</body>
+</html>`;
+        }
+
+        /**
          * Abre el cliente de correo especificado
          */
         function openEmailClient(provider) {
@@ -1204,19 +1312,28 @@ ${formData.nombre}`;
             // Mostrar indicador de carga
             loadingIndicator.classList.add('show');
             
-            // Usar contenido sin HTML para Outlook, con HTML para Gmail
-            const content = provider === 'outlook' ? generatePlainTextContent() : generateEmailContent();
+            const isMobile = isMobileDevice();
+            let content;
+            
+            // Estrategia diferente según dispositivo y proveedor
+            if (isMobile) {
+                // Para móviles, usar HTML optimizado para apps nativas
+                content = generateMobileHTMLContent();
+            } else {
+                // Para desktop, usar la estrategia anterior
+                content = provider === 'outlook' ? generatePlainTextContent() : generateEmailContent();
+            }
+            
             const encodedContent = encodeURIComponent(content);
             const encodedSubject = encodeURIComponent(EMAIL_CONFIG.subject);
-            const isMobile = isMobileDevice();
             
             let urls;
             
             if (isMobile) {
-                // URLs para móviles
+                // URLs para móviles con parámetros adicionales para HTML
                 urls = {
-                    gmail: `googlegmail://co?to=${EMAIL_CONFIG.recipient}&su=${encodedSubject}&body=${encodedContent}`,
-                    outlook: `ms-outlook://compose?to=${EMAIL_CONFIG.recipient}&subject=${encodedSubject}&body=${encodedContent}`
+                    gmail: `googlegmail://co?to=${EMAIL_CONFIG.recipient}&su=${encodedSubject}&body=${encodedContent}&html=1`,
+                    outlook: `ms-outlook://compose?to=${EMAIL_CONFIG.recipient}&subject=${encodedSubject}&body=${encodedContent}&bodyformat=html`
                 };
             } else {
                 // URLs para desktop
@@ -1231,18 +1348,8 @@ ${formData.nombre}`;
                 const url = urls[provider];
                 
                 if (isMobile) {
-                    // Intentar abrir app nativa primero, si falla usar web
-                    const fallbackUrls = {
-                        gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_CONFIG.recipient}&su=${encodedSubject}&body=${encodedContent}`,
-                        outlook: `https://outlook.live.com/mail/0/deeplink/compose?to=${EMAIL_CONFIG.recipient}&subject=${encodedSubject}&body=${encodedContent}`
-                    };
-                    
-                    window.location.href = url;
-                    
-                    // Fallback después de 2 segundos si no se abre la app
-                    setTimeout(() => {
-                        window.open(fallbackUrls[provider], '_blank');
-                    }, 2000);
+                    // Intentar múltiples métodos para móviles
+                    tryMobileEmailOpen(provider, url, encodedContent, encodedSubject);
                 } else {
                     window.open(url, '_blank');
                 }
@@ -1252,6 +1359,48 @@ ${formData.nombre}`;
                     loadingIndicator.classList.remove('show');
                 }, 1500);
             }, 300);
+        }
+
+        /**
+         * Intenta abrir el cliente de email en móviles con múltiples métodos
+         */
+        function tryMobileEmailOpen(provider, primaryUrl, encodedContent, encodedSubject) {
+            // Método 1: Intentar URL con parámetros HTML
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = primaryUrl;
+            document.body.appendChild(iframe);
+            
+            // Método 2: Fallback a URL básica después de 1 segundo
+            setTimeout(() => {
+                const basicUrls = {
+                    gmail: `googlegmail://co?to=${EMAIL_CONFIG.recipient}&su=${encodedSubject}&body=${encodedContent}`,
+                    outlook: `ms-outlook://compose?to=${EMAIL_CONFIG.recipient}&subject=${encodedSubject}&body=${encodedContent}`
+                };
+                
+                try {
+                    window.location.href = basicUrls[provider];
+                } catch (e) {
+                    console.log('Error opening native app:', e);
+                }
+            }, 1000);
+            
+            // Método 3: Fallback final a versión web después de 3 segundos
+            setTimeout(() => {
+                const webUrls = {
+                    gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_CONFIG.recipient}&su=${encodedSubject}&body=${encodedContent}`,
+                    outlook: `https://outlook.live.com/mail/0/deeplink/compose?to=${EMAIL_CONFIG.recipient}&subject=${encodedSubject}&body=${encodedContent}`
+                };
+                
+                window.open(webUrls[provider], '_blank');
+            }, 3000);
+            
+            // Limpiar iframe después de 5 segundos
+            setTimeout(() => {
+                if (iframe.parentNode) {
+                    document.body.removeChild(iframe);
+                }
+            }, 5000);
         }
 
         // Event listeners
@@ -1276,14 +1425,94 @@ ${formData.nombre}`;
 
         // Event listeners para botones de acción del documento
         COPY_BTN.addEventListener('click', copyToClipboard);
+        COPY_HTML_BTN.addEventListener('click', copyHTMLToClipboard);
+
+        /**
+         * Copia el HTML formateado al portapapeles (específico para móviles)
+         */
+        async function copyHTMLToClipboard() {
+            try {
+                const htmlContent = generateMobileHTMLContent();
+                const plainContent = generatePlainTextContent();
+                
+                if (navigator.clipboard && navigator.clipboard.write) {
+                    // Intentar copiar como HTML y texto plano
+                    const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
+                    const textBlob = new Blob([plainContent], { type: 'text/plain' });
+                    
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            'text/html': htmlBlob,
+                            'text/plain': textBlob
+                        })
+                    ]);
+                    
+                    // Mostrar feedback visual
+                    const originalText = COPY_HTML_BTN.textContent;
+                    COPY_HTML_BTN.textContent = '✓ HTML Copiado';
+                    COPY_HTML_BTN.style.backgroundColor = '#28a745';
+                    setTimeout(() => {
+                        COPY_HTML_BTN.textContent = originalText;
+                        COPY_HTML_BTN.style.backgroundColor = '';
+                    }, 3000);
+                } else {
+                    // Fallback: copiar solo el texto plano
+                    await navigator.clipboard.writeText(plainContent);
+                    
+                    // Mostrar feedback visual
+                    const originalText = COPY_HTML_BTN.textContent;
+                    COPY_HTML_BTN.textContent = '✓ Texto Copiado';
+                    COPY_HTML_BTN.style.backgroundColor = '#ffc107';
+                    setTimeout(() => {
+                        COPY_HTML_BTN.textContent = originalText;
+                        COPY_HTML_BTN.style.backgroundColor = '';
+                    }, 3000);
+                }
+            } catch (err) {
+                console.error('Error copying to clipboard:', err);
+                // Fallback manual
+                const textArea = document.createElement('textarea');
+                textArea.value = generatePlainTextContent();
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Mostrar feedback visual
+                const originalText = COPY_HTML_BTN.textContent;
+                COPY_HTML_BTN.textContent = '✓ Copiado (Texto)';
+                COPY_HTML_BTN.style.backgroundColor = '#ffc107';
+                setTimeout(() => {
+                    COPY_HTML_BTN.textContent = originalText;
+                    COPY_HTML_BTN.style.backgroundColor = '';
+                }, 3000);
+            }
+        }
 
         /**
          * Copia el texto al portapapeles
          */
         async function copyToClipboard() {
             try {
-                const content = generatePlainTextContent();
-                await navigator.clipboard.writeText(content);
+                const isMobile = isMobileDevice();
+                // En móviles, intentar copiar HTML si es posible
+                const content = isMobile ? generateMobileHTMLContent() : generatePlainTextContent();
+                
+                if (navigator.clipboard && navigator.clipboard.write) {
+                    // Intentar copiar como HTML en navegadores compatibles
+                    const htmlBlob = new Blob([content], { type: 'text/html' });
+                    const textBlob = new Blob([generatePlainTextContent()], { type: 'text/plain' });
+                    
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            'text/html': htmlBlob,
+                            'text/plain': textBlob
+                        })
+                    ]);
+                } else {
+                    // Fallback a texto plano
+                    await navigator.clipboard.writeText(generatePlainTextContent());
+                }
                 
                 // Mostrar feedback visual
                 const originalText = COPY_BTN.textContent;
