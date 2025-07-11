@@ -531,6 +531,19 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .email-info {
+                padding: 15px;
+                margin: 20px 0;
+            }
+
+            .email-info h3 {
+                font-size: 1.1rem;
+            }
+
+            .email-value span {
+                font-size: 13px;
+            }
         }
 
         /* Pantallas muy pequeñas (menos de 480px) */
@@ -613,6 +626,33 @@
             .email-actions {
                 gap: 10px;
                 margin-top: 20px;
+            }
+
+            .email-info {
+                padding: 12px;
+                margin: 15px 0;
+            }
+
+            .email-info h3 {
+                font-size: 1rem;
+            }
+
+            .email-info p {
+                font-size: 13px;
+            }
+
+            .email-value {
+                padding: 8px 10px;
+                gap: 8px;
+            }
+
+            .email-value span {
+                font-size: 12px;
+            }
+
+            .btn-copy-small {
+                padding: 4px 8px;
+                font-size: 11px;
             }
 
             .text-center p {
@@ -809,6 +849,84 @@
             }
         }
 
+        /* Información de envío manual */
+        .email-info {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .email-info h3 {
+            color: var(--primary-color);
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .email-info p {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .email-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .email-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .email-field label {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        .email-value {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            padding: 10px 12px;
+        }
+
+        .email-value span {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--text-color);
+            word-break: break-all;
+        }
+
+        .btn-copy-small {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            min-height: auto;
+        }
+
+        .btn-copy-small:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-copy-small:active {
+            transform: scale(0.95);
+        }
+
         /* Aviso de privacidad */
         .privacy-notice {
             background-color: #e8f4f8;
@@ -927,6 +1045,29 @@
                     📧 Abrir Outlook
                 </button>
             </div>
+            
+            <!-- Información de envío manual -->
+            <div class="email-info">
+                <h3>📧 Información de Envío</h3>
+                <p><strong>Si prefieres usar otro cliente de email o los botones no funcionan:</strong></p>
+                <div class="email-details">
+                    <div class="email-field">
+                        <label>📮 Destinatario:</label>
+                        <div class="email-value">
+                            <span id="recipientText">proyectosnormativos-dgorden@sanidad.gob.es</span>
+                            <button id="copyRecipientBtn" class="btn btn-copy-small">📋</button>
+                        </div>
+                    </div>
+                    <div class="email-field">
+                        <label>📝 Asunto:</label>
+                        <div class="email-value">
+                            <span id="subjectText">Alegación consulta pública especialidad Genética de Laboratorio</span>
+                            <button id="copySubjectBtn" class="btn btn-copy-small">📋</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="text-center mt-3">
                 <p style="font-size: 14px; color: #666; margin-bottom: 10px;">
                     <strong>📋 Recuerda:</strong> Si no copiaste el documento en el paso anterior, puedes hacerlo ahora
@@ -1229,6 +1370,11 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
                 const copyBtn = document.getElementById('btn-copy');
                 copyBtn.classList.add('btn-copy-highlight');
             }
+            
+            // Configurar event listeners para el paso 3
+            if (index === 2) {
+                setupStep3EventListeners();
+            }
         }
 
         /**
@@ -1479,6 +1625,74 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
                     COPY_BTN.style.backgroundColor = '';
                 }, 2000);
             }
+        }
+
+        /**
+         * Configura los event listeners para el paso 3
+         */
+        function setupStep3EventListeners() {
+            const copyRecipientBtn = document.getElementById('copyRecipientBtn');
+            const copySubjectBtn = document.getElementById('copySubjectBtn');
+            
+            if (copyRecipientBtn) {
+                copyRecipientBtn.addEventListener('click', copyRecipient);
+            }
+            if (copySubjectBtn) {
+                copySubjectBtn.addEventListener('click', copySubject);
+            }
+        }
+
+        /**
+         * Copia el email del destinatario al portapapeles
+         */
+        async function copyRecipient() {
+            const copyRecipientBtn = document.getElementById('copyRecipientBtn');
+            try {
+                await navigator.clipboard.writeText(EMAIL_CONFIG.recipient);
+                showCopyFeedback(copyRecipientBtn, '✓');
+            } catch (err) {
+                // Fallback manual
+                const textArea = document.createElement('textarea');
+                textArea.value = EMAIL_CONFIG.recipient;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyFeedback(copyRecipientBtn, '✓');
+            }
+        }
+
+        /**
+         * Copia el asunto al portapapeles
+         */
+        async function copySubject() {
+            const copySubjectBtn = document.getElementById('copySubjectBtn');
+            try {
+                await navigator.clipboard.writeText(EMAIL_CONFIG.subject);
+                showCopyFeedback(copySubjectBtn, '✓');
+            } catch (err) {
+                // Fallback manual
+                const textArea = document.createElement('textarea');
+                textArea.value = EMAIL_CONFIG.subject;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyFeedback(copySubjectBtn, '✓');
+            }
+        }
+
+        /**
+         * Muestra feedback visual para botones pequeños de copiar
+         */
+        function showCopyFeedback(button, text) {
+            const originalText = button.textContent;
+            button.textContent = text;
+            button.style.backgroundColor = '#28a745';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.backgroundColor = '';
+            }, 1500);
         }
 
         // Inicialización
