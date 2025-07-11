@@ -775,6 +775,33 @@
             background-color: #5a6268;
         }
 
+        .btn-copy-highlight {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+            border: 2px solid var(--primary-color);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-copy-highlight:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 86, 179, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(0, 86, 179, 0.5); }
+            100% { box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
         @media (max-width: 480px) {
             .document-actions {
                 flex-direction: column;
@@ -878,15 +905,11 @@
         <!-- Paso 2: Contenido generado -->
         <div id="step2" class="step">
             <h2>Paso 2: Contenido Generado</h2>
-            <p class="step-tip">
-                <strong>💡 Tip:</strong> El botón "Copiar con Formato" copiará el documento manteniendo el formato (negritas, párrafos, etc.) 
-                pero sin los fondos azules de los datos. Perfecto para pegar directamente en aplicaciones de email.
-            </p>
             <div id="contentArea" class="content-area">
                 <!-- El contenido generado se mostrará aquí automáticamente -->
             </div>
             <div class="document-actions">
-                <button id="btn-copy" class="btn btn-copy">📋 Copiar con Formato</button>
+                <button id="btn-copy" class="btn btn-copy btn-copy-highlight">📋 Copiar con Formato</button>
             </div>
         </div>
 
@@ -894,8 +917,7 @@
         <div id="step3" class="step">
             <h2 class="text-center">Paso 3: Enviar por Correo</h2>
             <p class="text-center mb-3">
-                <strong>Proceso simple:</strong> Abre tu cliente de correo (destinatario y asunto se completarán automáticamente) 
-                y luego pega el contenido que copiaste en el paso anterior.
+                <strong>Proceso simple:</strong> Abre tu cliente de correo y luego pega el contenido que copiaste en el paso anterior.
             </p>
             <div class="email-actions">
                 <button id="gmailBtn" class="btn btn-gmail">
@@ -910,7 +932,7 @@
                     <strong>📋 Recuerda:</strong> Si no copiaste el documento en el paso anterior, puedes hacerlo ahora
                 </p>
                 <button id="copyHTMLBtn" class="btn btn-secondary">
-                    📋 Copiar Documento con Formato
+                    📋 Copiar documento
                 </button>
             </div>
         </div>
@@ -941,6 +963,7 @@
         const COPY_HTML_BTN = document.getElementById('copyHTMLBtn');
         
         let currentStep = 0;
+        let documentCopied = false;
 
         // Configuración del correo
         const EMAIL_CONFIG = {
@@ -1201,6 +1224,10 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
             // Generar contenido en el paso 2
             if (index === 1) {
                 CONTENT_AREA.innerHTML = generateContent();
+                // Resetear estado de copiado si se vuelve al paso 2
+                documentCopied = false;
+                const copyBtn = document.getElementById('btn-copy');
+                copyBtn.classList.add('btn-copy-highlight');
             }
         }
 
@@ -1238,7 +1265,7 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
             if (isMobile) {
                 // URLs para móviles (solo destinatario y asunto)
                 urls = {
-                    gmail: `googlegmail://co?to=${encodedRecipient}&su=${encodedSubject}`,
+                    gmail: `googlegmail://co?to=${encodedRecipient}&subject=${encodedSubject}`,
                     outlook: `ms-outlook://compose?to=${encodedRecipient}&subject=${encodedSubject}`
                 };
             } else {
@@ -1296,6 +1323,12 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
         NEXT_BTN.addEventListener('click', () => {
             if (currentStep === 0 && !validateForm()) return;
             
+            // Verificar si se ha copiado el documento antes de avanzar al paso 3
+            if (currentStep === 1 && !documentCopied) {
+                showCopyWarning();
+                return;
+            }
+            
             if (currentStep < STEPS.length - 1) {
                 currentStep++;
                 showStep(currentStep);
@@ -1317,6 +1350,26 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
         COPY_HTML_BTN.addEventListener('click', copyHTMLToClipboard);
 
         /**
+         * Muestra un aviso cuando el usuario intenta avanzar sin copiar
+         */
+        function showCopyWarning() {
+            const copyBtn = document.getElementById('btn-copy');
+            const originalText = copyBtn.textContent;
+            
+            // Mostrar mensaje de aviso
+            copyBtn.textContent = '⚠️ Debes copiar el documento primero';
+            copyBtn.style.backgroundColor = '#dc3545';
+            copyBtn.style.animation = 'shake 0.5s';
+            
+            // Restaurar después de 3 segundos
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.backgroundColor = '';
+                copyBtn.style.animation = '';
+            }, 3000);
+        }
+
+        /**
          * Copia el contenido al portapapeles para pegar manualmente
          */
         async function copyHTMLToClipboard() {
@@ -1336,6 +1389,9 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
                     await navigator.clipboard.writeText(plainContent);
                 }
                 
+                // Marcar como copiado
+                documentCopied = true;
+                
                 // Mostrar feedback visual
                 const originalText = COPY_HTML_BTN.textContent;
                 COPY_HTML_BTN.textContent = '✓ Copiado con Formato';
@@ -1353,6 +1409,9 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
                 textArea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
+                
+                // Marcar como copiado
+                documentCopied = true;
                 
                 // Mostrar feedback visual
                 const originalText = COPY_HTML_BTN.textContent;
@@ -1385,10 +1444,14 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
                     await navigator.clipboard.writeText(plainContent);
                 }
                 
+                // Marcar como copiado
+                documentCopied = true;
+                
                 // Mostrar feedback visual
                 const originalText = COPY_BTN.textContent;
                 COPY_BTN.textContent = '✓ Copiado con Formato';
                 COPY_BTN.style.backgroundColor = '#28a745';
+                COPY_BTN.classList.remove('btn-copy-highlight');
                 setTimeout(() => {
                     COPY_BTN.textContent = originalText;
                     COPY_BTN.style.backgroundColor = '';
@@ -1403,10 +1466,14 @@ ${formData.telefono ? `<p><strong>Teléfono de contacto:</strong></p><p><strong>
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
                 
+                // Marcar como copiado
+                documentCopied = true;
+                
                 // Mostrar feedback visual
                 const originalText = COPY_BTN.textContent;
                 COPY_BTN.textContent = '✓ Copiado';
                 COPY_BTN.style.backgroundColor = '#28a745';
+                COPY_BTN.classList.remove('btn-copy-highlight');
                 setTimeout(() => {
                     COPY_BTN.textContent = originalText;
                     COPY_BTN.style.backgroundColor = '';
