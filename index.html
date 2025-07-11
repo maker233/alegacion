@@ -877,10 +877,10 @@
             </div>
             <div class="text-center mt-3">
                 <p style="font-size: 14px; color: #666; margin-bottom: 10px;">
-                    <strong>Alternativa para móviles:</strong> Si las apps no se abren correctamente, puedes copiar el texto formateado
+                    <strong>Alternativa:</strong> Si las apps no se abren correctamente, puedes copiar el texto y pegarlo manualmente
                 </p>
                 <button id="copyHTMLBtn" class="btn btn-secondary">
-                    📋 Copiar HTML Formateado
+                    📋 Copiar para Pegar Manualmente
                 </button>
             </div>
         </div>
@@ -1315,12 +1315,12 @@ ${formData.nombre}`;
             const isMobile = isMobileDevice();
             let content;
             
-            // Estrategia diferente según dispositivo y proveedor
+            // Estrategia unificada: usar texto plano para máxima compatibilidad
+            // Las apps móviles no interpretan HTML en el parámetro body
             if (isMobile) {
-                // Para móviles, usar HTML optimizado para apps nativas
-                content = generateMobileHTMLContent();
+                content = generatePlainTextContent();
             } else {
-                // Para desktop, usar la estrategia anterior
+                // Para desktop, mantener estrategia diferenciada
                 content = provider === 'outlook' ? generatePlainTextContent() : generateEmailContent();
             }
             
@@ -1330,10 +1330,10 @@ ${formData.nombre}`;
             let urls;
             
             if (isMobile) {
-                // URLs para móviles con parámetros adicionales para HTML
+                // URLs básicas para móviles (sin parámetros HTML inválidos)
                 urls = {
-                    gmail: `googlegmail://co?to=${EMAIL_CONFIG.recipient}&su=${encodedSubject}&body=${encodedContent}&html=1`,
-                    outlook: `ms-outlook://compose?to=${EMAIL_CONFIG.recipient}&subject=${encodedSubject}&body=${encodedContent}&bodyformat=html`
+                    gmail: `googlegmail://co?to=${EMAIL_CONFIG.recipient}&su=${encodedSubject}&body=${encodedContent}`,
+                    outlook: `ms-outlook://compose?to=${EMAIL_CONFIG.recipient}&subject=${encodedSubject}&body=${encodedContent}`
                 };
             } else {
                 // URLs para desktop
@@ -1348,8 +1348,8 @@ ${formData.nombre}`;
                 const url = urls[provider];
                 
                 if (isMobile) {
-                    // Intentar múltiples métodos para móviles
-                    tryMobileEmailOpen(provider, url, encodedContent, encodedSubject);
+                    // Estrategia simplificada para móviles
+                    tryMobileEmailOpen(provider, url);
                 } else {
                     window.open(url, '_blank');
                 }
@@ -1362,45 +1362,25 @@ ${formData.nombre}`;
         }
 
         /**
-         * Intenta abrir el cliente de email en móviles con múltiples métodos
+         * Intenta abrir el cliente de email en móviles con método simplificado
          */
-        function tryMobileEmailOpen(provider, primaryUrl, encodedContent, encodedSubject) {
-            // Método 1: Intentar URL con parámetros HTML
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = primaryUrl;
-            document.body.appendChild(iframe);
+        function tryMobileEmailOpen(provider, appUrl) {
+            // Método 1: Intentar abrir app nativa directamente
+            try {
+                window.location.href = appUrl;
+            } catch (e) {
+                console.log('Error opening native app:', e);
+            }
             
-            // Método 2: Fallback a URL básica después de 1 segundo
-            setTimeout(() => {
-                const basicUrls = {
-                    gmail: `googlegmail://co?to=${EMAIL_CONFIG.recipient}&su=${encodedSubject}&body=${encodedContent}`,
-                    outlook: `ms-outlook://compose?to=${EMAIL_CONFIG.recipient}&subject=${encodedSubject}&body=${encodedContent}`
-                };
-                
-                try {
-                    window.location.href = basicUrls[provider];
-                } catch (e) {
-                    console.log('Error opening native app:', e);
-                }
-            }, 1000);
-            
-            // Método 3: Fallback final a versión web después de 3 segundos
+            // Método 2: Fallback a versión web después de 2 segundos
             setTimeout(() => {
                 const webUrls = {
-                    gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_CONFIG.recipient}&su=${encodedSubject}&body=${encodedContent}`,
-                    outlook: `https://outlook.live.com/mail/0/deeplink/compose?to=${EMAIL_CONFIG.recipient}&subject=${encodedSubject}&body=${encodedContent}`
+                    gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_CONFIG.recipient}&su=${encodeURIComponent(EMAIL_CONFIG.subject)}&body=${encodeURIComponent(generatePlainTextContent())}`,
+                    outlook: `https://outlook.live.com/mail/0/deeplink/compose?to=${EMAIL_CONFIG.recipient}&subject=${encodeURIComponent(EMAIL_CONFIG.subject)}&body=${encodeURIComponent(generatePlainTextContent())}`
                 };
                 
                 window.open(webUrls[provider], '_blank');
-            }, 3000);
-            
-            // Limpiar iframe después de 5 segundos
-            setTimeout(() => {
-                if (iframe.parentNode) {
-                    document.body.removeChild(iframe);
-                }
-            }, 5000);
+            }, 2000);
         }
 
         // Event listeners
@@ -1428,46 +1408,21 @@ ${formData.nombre}`;
         COPY_HTML_BTN.addEventListener('click', copyHTMLToClipboard);
 
         /**
-         * Copia el HTML formateado al portapapeles (específico para móviles)
+         * Copia el contenido al portapapeles para pegar manualmente
          */
         async function copyHTMLToClipboard() {
             try {
-                const htmlContent = generateMobileHTMLContent();
-                const plainContent = generatePlainTextContent();
+                const content = generatePlainTextContent();
+                await navigator.clipboard.writeText(content);
                 
-                if (navigator.clipboard && navigator.clipboard.write) {
-                    // Intentar copiar como HTML y texto plano
-                    const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
-                    const textBlob = new Blob([plainContent], { type: 'text/plain' });
-                    
-                    await navigator.clipboard.write([
-                        new ClipboardItem({
-                            'text/html': htmlBlob,
-                            'text/plain': textBlob
-                        })
-                    ]);
-                    
-                    // Mostrar feedback visual
-                    const originalText = COPY_HTML_BTN.textContent;
-                    COPY_HTML_BTN.textContent = '✓ HTML Copiado';
-                    COPY_HTML_BTN.style.backgroundColor = '#28a745';
-                    setTimeout(() => {
-                        COPY_HTML_BTN.textContent = originalText;
-                        COPY_HTML_BTN.style.backgroundColor = '';
-                    }, 3000);
-                } else {
-                    // Fallback: copiar solo el texto plano
-                    await navigator.clipboard.writeText(plainContent);
-                    
-                    // Mostrar feedback visual
-                    const originalText = COPY_HTML_BTN.textContent;
-                    COPY_HTML_BTN.textContent = '✓ Texto Copiado';
-                    COPY_HTML_BTN.style.backgroundColor = '#ffc107';
-                    setTimeout(() => {
-                        COPY_HTML_BTN.textContent = originalText;
-                        COPY_HTML_BTN.style.backgroundColor = '';
-                    }, 3000);
-                }
+                // Mostrar feedback visual
+                const originalText = COPY_HTML_BTN.textContent;
+                COPY_HTML_BTN.textContent = '✓ Copiado';
+                COPY_HTML_BTN.style.backgroundColor = '#28a745';
+                setTimeout(() => {
+                    COPY_HTML_BTN.textContent = originalText;
+                    COPY_HTML_BTN.style.backgroundColor = '';
+                }, 3000);
             } catch (err) {
                 console.error('Error copying to clipboard:', err);
                 // Fallback manual
@@ -1480,8 +1435,8 @@ ${formData.nombre}`;
                 
                 // Mostrar feedback visual
                 const originalText = COPY_HTML_BTN.textContent;
-                COPY_HTML_BTN.textContent = '✓ Copiado (Texto)';
-                COPY_HTML_BTN.style.backgroundColor = '#ffc107';
+                COPY_HTML_BTN.textContent = '✓ Copiado';
+                COPY_HTML_BTN.style.backgroundColor = '#28a745';
                 setTimeout(() => {
                     COPY_HTML_BTN.textContent = originalText;
                     COPY_HTML_BTN.style.backgroundColor = '';
@@ -1494,25 +1449,8 @@ ${formData.nombre}`;
          */
         async function copyToClipboard() {
             try {
-                const isMobile = isMobileDevice();
-                // En móviles, intentar copiar HTML si es posible
-                const content = isMobile ? generateMobileHTMLContent() : generatePlainTextContent();
-                
-                if (navigator.clipboard && navigator.clipboard.write) {
-                    // Intentar copiar como HTML en navegadores compatibles
-                    const htmlBlob = new Blob([content], { type: 'text/html' });
-                    const textBlob = new Blob([generatePlainTextContent()], { type: 'text/plain' });
-                    
-                    await navigator.clipboard.write([
-                        new ClipboardItem({
-                            'text/html': htmlBlob,
-                            'text/plain': textBlob
-                        })
-                    ]);
-                } else {
-                    // Fallback a texto plano
-                    await navigator.clipboard.writeText(generatePlainTextContent());
-                }
+                const content = generatePlainTextContent();
+                await navigator.clipboard.writeText(content);
                 
                 // Mostrar feedback visual
                 const originalText = COPY_BTN.textContent;
