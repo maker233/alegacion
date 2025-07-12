@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0056b3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Alegación Especialidad Genética de Laboratorio</title>
+    <style>
+        /* Variables CSS para mejor mantenibilidad */
+        :root {
+            --primary-color: #0056b3;
+            --primary-hover: #004494;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --success-hover: #218838;
+            --danger-color: #dc3545;
+            --danger-hover: #c82333;
+            --gmail-color: #dd4b39;
+            --gmail-hover: #c23321;
+            --outlook-color: #0078d4;
+            --outlook-hover: #106ebe;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-color: #333333;
+            --border-color: #dee2e6;
+            --input-border: #ced4da;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset y base */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            /* Mejoras para móviles */
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            overflow-x: hidden;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-background);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            /* Mejoras para móviles */
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Tipografía */
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 300;
+            /* Prevenir selección accidental */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 400;
+            /* Prevenir selección accidental */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Indicador de progreso */
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+            /* Prevenir selección accidental */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .progress-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: var(--transition);
+            position: relative;
+            /* Mejoras táctiles */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .progress-step.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .progress-step.completed {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .progress-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 30px;
+            height: 2px;
+            background-color: var(--border-color);
+            transform: translateY(-50%);
+        }
+
+        .progress-step.completed:not(:last-child)::after {
+            background-color: var(--success-color);
+        }
+
+        /* Formulario */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--input-border);
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+            background-color: #fff;
+            /* Mejoras móviles */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        input[type="tel"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+        }
+
+        /* Botones */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            /* Mejoras táctiles */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            min-height: 44px; /* Tamaño mínimo para táctil */
+            outline: none;
+        }
+
+        .btn:focus {
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-gmail {
+            background-color: var(--gmail-color);
+            color: white;
+            margin-right: 15px;
+        }
+
+        .btn-gmail:hover {
+            background-color: var(--gmail-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outlook {
+            background-color: var(--outlook-color);
+            color: white;
+        }
+
+        .btn-outlook:hover {
+            background-color: var(--outlook-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Área de contenido */
+        .content-area {
+            border: 2px solid var(--border-color);
+            padding: 25px;
+            min-height: 300px;
+            background-color: #f8f9fa;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border-radius: var(--border-radius);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            /* Mejoras para móviles */
+            -webkit-overflow-scrolling: touch;
+            overflow-y: auto;
+            max-height: 70vh;
+        }
+
+        /* Estilos para el documento generado */
+        .document-content {
+            font-family: 'Times New Roman', serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #000;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .document-content p {
+            margin: 0 0 6px 0;
+            text-align: justify;
+        }
+
+        .document-content ul {
+            margin: 6px 0;
+            padding-left: 20px;
+            list-style-type: none;
+        }
+
+        .document-content li {
+            margin: 2px 0;
+            padding-left: 0;
+        }
+
+        .document-content strong {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .document-content .form-data {
+            color: #0066cc;
+            font-weight: 600;
+            background-color: rgba(0, 102, 204, 0.1);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Títulos principales del documento */
+        .document-content p:first-child {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Espaciado especial para secciones importantes */
+        .document-content .section-title {
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        /* Espaciado para listas de viñetas */
+        .document-content .bullet-list {
+            margin: 6px 0;
+            padding-left: 20px;
+        }
+
+        .document-content .bullet-list li {
+            margin: 3px 0;
+            list-style-type: disc;
+        }
+
+        /* Mejoras para móviles en el documento */
+        @media (max-width: 768px) {
+            .document-content {
+                font-size: 13px;
+                padding: 15px;
+                line-height: 1.5;
+            }
+
+            .document-content p:first-child {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .document-content {
+                font-size: 12px;
+                padding: 12px;
+                line-height: 1.4;
+            }
+
+            .document-content p:first-child {
+                font-size: 14px;
+            }
+
+            .document-content .form-data {
+                font-size: 12px;
+                padding: 1px 3px;
+            }
+        }
+
+        /* Pasos */
+        .step {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navegación */
+        .step-navigation {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Prevenir selección accidental */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .email-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            /* Prevenir selección accidental */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Indicador de carga para navegación */
+        .loading-indicator {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .loading-indicator.show {
+            display: block;
+        }
+
+        /* Estilos para el texto explicativo del paso 2 */
+        .step-tip {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px 15px;
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+
+            .step-tip {
+                font-size: 13px;
+                padding: 10px 12px;
+                margin-bottom: 12px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+            }
+
+            .progress-indicator {
+                gap: 8px;
+                margin-bottom: 25px;
+            }
+
+            .progress-step {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+
+            .progress-step:not(:last-child)::after {
+                width: 25px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="date"],
+            input[type="tel"] {
+                padding: 14px 16px;
+                font-size: 16px; /* Evita zoom en iOS */
+                border-radius: 6px;
+            }
+
+            .btn {
+                padding: 14px 20px;
+                font-size: 16px;
+                min-height: 48px; /* Tamaño táctil mínimo */
+                border-radius: 6px;
+            }
+
+            .content-area {
+                padding: 15px;
+                font-size: 13px;
+                line-height: 1.4;
+                min-height: 250px;
+                border-radius: 6px;
+            }
+
+            .step-navigation {
+                margin-top: 25px;
+                gap: 10px;
+            }
+
+            .email-actions {
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 25px;
+            }
+
+            .btn-gmail,
+            .btn-outlook {
+                margin-right: 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .email-info {
+                padding: 15px;
+                margin: 20px 0;
+            }
+
+            .email-info h3 {
+                font-size: 1.1rem;
+            }
+
+            .email-value span {
+                font-size: 13px;
+            }
+        }
+
+        /* Pantallas muy pequeñas (menos de 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 10px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                line-height: 1.2;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                line-height: 1.3;
+            }
+
+            .step-tip {
+                font-size: 12px;
+                padding: 8px 10px;
+                margin-bottom: 10px;
+            }
+
+            .progress-indicator {
+                gap: 5px;
+                margin-bottom: 20px;
+            }
+
+            .progress-step {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+
+            .progress-step:not(:last-child)::after {
+                width: 15px;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+
+            label {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="date"],
+            input[type="tel"] {
+                padding: 12px 14px;
+                font-size: 16px;
+            }
+
+            .content-area {
+                padding: 12px;
+                font-size: 12px;
+                line-height: 1.3;
+                min-height: 200px;
+            }
+
+            .btn {
+                padding: 12px 16px;
+                font-size: 15px;
+                min-height: 44px;
+            }
+
+            .step-navigation {
+                margin-top: 20px;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .step-navigation .btn {
+                width: 100%;
+            }
+
+            .email-actions {
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .email-info {
+                padding: 12px;
+                margin: 15px 0;
+            }
+
+            .email-info h3 {
+                font-size: 1rem;
+            }
+
+            .email-info p {
+                font-size: 13px;
+            }
+
+            .email-value {
+                padding: 8px 10px;
+                gap: 8px;
+            }
+
+            .email-value span {
+                font-size: 12px;
+            }
+
+            .btn-copy-small {
+                padding: 4px 8px;
+                font-size: 11px;
+            }
+
+            .text-center p {
+                font-size: 14px;
+                line-height: 1.4;
+            }
+        }
+
+        /* Pantallas grandes (tablets landscape y desktop) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                max-width: 750px;
+                padding: 35px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Pantallas extra grandes */
+        @media (min-width: 1025px) {
+            .container {
+                max-width: 900px;
+            }
+
+            .content-area {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+        }
+
+        /* Orientación landscape en móviles */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+
+            .progress-indicator {
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .content-area {
+                min-height: 180px;
+                font-size: 12px;
+            }
+
+            .step-navigation {
+                margin-top: 20px;
+            }
+
+            .email-actions {
+                flex-direction: row;
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .btn-gmail,
+            .btn-outlook {
+                width: auto;
+                flex: 1;
+            }
+        }
+
+        /* Mejoras para dispositivos táctiles */
+        @media (hover: none) and (pointer: coarse) {
+            .btn:hover {
+                transform: none; /* Desactivar hover en dispositivos táctiles */
+            }
+
+            .btn:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
+
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="date"]:focus,
+            input[type="tel"]:focus {
+                transform: scale(1.02);
+                transition: transform 0.2s ease;
+            }
+        }
+
+        /* Mejoras específicas para iOS */
+        @supports (-webkit-touch-callout: none) {
+            input[type="text"],
+            input[type="email"],
+            input[type="date"],
+            input[type="tel"] {
+                -webkit-appearance: none;
+                border-radius: 6px;
+            }
+
+            .btn {
+                -webkit-appearance: none;
+                border-radius: 6px;
+            }
+        }
+
+        /* Mejoras para Android */
+        @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            .progress-step {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* Utilidades */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-3 {
+            margin-top: 1rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Estilos para campos obligatorios */
+        .required::after {
+            content: ' *';
+            color: var(--danger-color);
+        }
+
+        /* Botones de acción en el paso 2 */
+        .document-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-copy {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-copy:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-copy-highlight {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+            border: 2px solid var(--primary-color);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-copy-highlight:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 86, 179, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(0, 86, 179, 0.5); }
+            100% { box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        @media (max-width: 480px) {
+            .document-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        /* Información de envío manual */
+        .email-info {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .email-info h3 {
+            color: var(--primary-color);
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .email-info p {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .email-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .email-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .email-field label {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        .email-value {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            padding: 10px 12px;
+        }
+
+        .email-value span {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--text-color);
+            word-break: break-all;
+        }
+
+        .btn-copy-small {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            min-height: auto;
+        }
+
+        .btn-copy-small:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-copy-small:active {
+            transform: scale(0.95);
+        }
+
+        /* Aviso de privacidad */
+        .privacy-notice {
+            background-color: #e8f4f8;
+            border: 1px solid #bee5eb;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .privacy-notice p {
+            margin: 0;
+            font-size: 14px;
+            color: #0c5460;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .privacy-notice {
+                padding: 12px;
+                margin-bottom: 20px;
+            border-radius: 4px;
+            }
+
+            .privacy-notice p {
+                font-size: 13px;
+                line-height: 1.3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .privacy-notice {
+                padding: 10px;
+                margin-bottom: 18px;
+            }
+
+            .privacy-notice p {
+                font-size: 12px;
+                line-height: 1.2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Alegación Especialidad Genética de Laboratorio</h1>
+        
+        <!-- Indicador de progreso -->
+        <div class="progress-indicator">
+            <div class="progress-step active" data-step="1">1</div>
+            <div class="progress-step" data-step="2">2</div>
+            <div class="progress-step" data-step="3">3</div>
+        </div>
+
+        <!-- Paso 1: Formulario -->
+        <div id="step1" class="step active">
+            <h2>Paso 1: Introduce tus Datos</h2>
+            
+            <div class="privacy-notice">
+                <p>
+                    <strong>🔒 Privacidad garantizada:</strong> Esta página no almacena ningún dato personal. 
+                    Es una herramienta simple para ayudarte a completar el texto de alegación y enviar 
+                    el correo electrónico. Todos los datos se procesan únicamente en tu navegador.
+                </p>
+            </div>
+            
+            <form id="dataForm">
+                <div class="form-group">
+                    <label for="userName" class="required">Nombre y Apellidos</label>
+                    <input type="text" id="userName" name="userName" required placeholder="Ej: Juan Pérez Gómez">
+                </div>
+
+                <div class="form-group">
+                    <label for="userDNI" class="required">DNI</label>
+                    <input type="text" id="userDNI" name="userDNI" required placeholder="Ej: 12345678A">
+                </div>
+
+                <div class="form-group">
+                    <label for="userEmail" class="required">Correo electrónico</label>
+                    <input type="email" id="userEmail" name="userEmail" required placeholder="Ej: juan@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="userPhone">Teléfono de contacto (opcional)</label>
+                    <input type="tel" id="userPhone" name="userPhone" placeholder="Ej: 600123456">
+                </div>
+
+                <div class="form-group">
+                    <label for="userDate" class="required">Fecha</label>
+                    <input type="date" id="userDate" name="userDate" required>
+                </div>
+            </form>
+        </div>
+
+        <!-- Paso 2: Contenido generado -->
+        <div id="step2" class="step">
+            <h2>Paso 2: Contenido Generado</h2>
+            <div id="contentArea" class="content-area">
+                <!-- El contenido generado se mostrará aquí automáticamente -->
+            </div>
+            <div class="document-actions">
+                <button id="btn-copy" class="btn btn-copy btn-copy-highlight">📋 Copiar con Formato</button>
+            </div>
+        </div>
+
+        <!-- Paso 3: Enviar por correo -->
+        <div id="step3" class="step">
+            <h2 class="text-center">Paso 3: Enviar por Correo</h2>
+            <p class="text-center mb-3">
+                <strong>Proceso simple:</strong> Abre tu cliente de correo y luego pega el contenido que copiaste en el paso anterior.
+            </p>
+            <div class="email-actions">
+                <button id="gmailBtn" class="btn btn-gmail">
+                    📧 Abrir Gmail
+                </button>
+                <button id="outlookBtn" class="btn btn-outlook">
+                    📧 Abrir Outlook
+                </button>
+            </div>
+            
+            <!-- Información de envío manual -->
+            <div class="email-info">
+                <h3>📧 Información de Envío</h3>
+                <p><strong>Si prefieres usar otro cliente de email o los botones no funcionan:</strong></p>
+                <div class="email-details">
+                    <div class="email-field">
+                        <label>📮 Destinatario:</label>
+                        <div class="email-value">
+                            <span id="recipientText">proyectosnormativos-dgorden@sanidad.gob.es</span>
+                            <button id="copyRecipientBtn" class="btn btn-copy-small">📋</button>
+                        </div>
+                    </div>
+                    <div class="email-field">
+                        <label>📝 Asunto:</label>
+                        <div class="email-value">
+                            <span id="subjectText">Alegación consulta pública especialidad Genética de Laboratorio</span>
+                            <button id="copySubjectBtn" class="btn btn-copy-small">📋</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-3">
+                <p style="font-size: 14px; color: #666; margin-bottom: 10px;">
+                    <strong>📋 Recuerda:</strong> Si no copiaste el documento en el paso anterior, puedes hacerlo ahora
+                </p>
+                <button id="copyHTMLBtn" class="btn btn-secondary">
+                    📋 Copiar documento
+                </button>
+            </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="step-navigation">
+            <button id="prevStep" class="btn btn-secondary">← Anterior</button>
+            <button id="nextStep" class="btn btn-primary">Siguiente →</button>
+        </div>
+    </div>
+
+    <!-- Indicador de carga -->
+    <div id="loadingIndicator" class="loading-indicator">
+        Abriendo cliente de correo...
+    </div>
+
+    <script>
+        // Constantes y elementos del DOM
+        const STEPS = document.querySelectorAll('.step');
+        const PROGRESS_STEPS = document.querySelectorAll('.progress-step');
+        const NEXT_BTN = document.getElementById('nextStep');
+        const PREV_BTN = document.getElementById('prevStep');
+        const CONTENT_AREA = document.getElementById('contentArea');
+        const DATA_FORM = document.getElementById('dataForm');
+        const GMAIL_BTN = document.getElementById('gmailBtn');
+        const OUTLOOK_BTN = document.getElementById('outlookBtn');
+        const COPY_BTN = document.getElementById('btn-copy');
+        const COPY_HTML_BTN = document.getElementById('copyHTMLBtn');
+        
+        let currentStep = 0;
+        let documentCopied = false;
+
+        // Configuración del correo
+        const EMAIL_CONFIG = {
+            recipient: 'proyectosnormativos-dgorden@sanidad.gob.es',
+            subject: 'Alegación consulta pública especialidad Genética de Laboratorio'
+        };
+
+        /**
+         * Genera el contenido del documento con los datos del formulario
+         */
+        function generateContent() {
+            const formData = {
+                nombre: document.getElementById('userName').value,
+                dni: document.getElementById('userDNI').value,
+                email: document.getElementById('userEmail').value,
+                telefono: document.getElementById('userPhone').value,
+                fecha: document.getElementById('userDate').value
+            };
+            
+            return `<div class="document-content">
+<p><strong>ESCRITO DE APORTACIÓN AL TRÁMITE DE CONSULTA PÚBLICA PREVIA</strong></p>
+
+<p><strong>Asunto:</strong> Alegaciones al trámite de consulta pública para la creación de la especialidad en Genética de Laboratorio.</p>
+
+<p><strong>Persona remitente:</strong></p>
+<p><strong>NOMBRE COMPLETO (obligatorio):</strong></p>
+<p><span class="form-data">${formData.nombre}</span></p>
+<p><strong>DNI/NIE (obligatorio):</strong></p>
+<p><span class="form-data">${formData.dni}</span></p>
+<p><strong>Correo electrónico de contacto (obligatorio):</strong></p>
+<p><span class="form-data">${formData.email}</span></p>
+${formData.telefono ? `<p><strong>Teléfono de contacto (opcional):</strong></p><p><span class="form-data">${formData.telefono}</span></p>` : ''}
+
+<p><strong>Órgano destinatario:</strong></p>
+<p>Dirección General de Ordenación Profesional</p>
+<p>Ministerio de Sanidad</p>
+
+<p><strong>Fecha:</strong></p>
+<p><span class="form-data">${formData.fecha}</span></p>
+
+<p><strong>EXPONE:</strong></p>
+
+<p>En el contexto de la consulta pública previa sobre la futura regulación de la especialidad de Genética de Laboratorio, deseo realizar las siguientes alegaciones y propuestas, con el objetivo de reforzar el enfoque asistencial, ético y normativo de la medicina genómica en el Sistema Nacional de Salud (SNS):</p>
+
+<p class="section-title"><strong>PROPUESTA DE INCLUSIÓN DEL ASESORAMIENTO GENÉTICO COMO COMPETENCIA ESPECÍFICA</strong></p>
+
+<p>Solicito que se <strong>incluya explícitamente el "asesoramiento genético"</strong> como una de las competencias fundamentales de la especialidad en Genética de Laboratorio, en tanto que constituye un componente esencial del proceso asistencial en enfermedades genéticas, y forma parte inseparable del ciclo clínico del diagnóstico molecular en medicina genómica. El asesoramiento genético a su vez, al menos tiene que contemplar:</p>
+
+<ul class="bullet-list">
+<li><strong>una consulta pretest</strong>, en la que se recoge el árbol genealógico, se explica las características feno-genotípicas de la enfermedad a estudio y las distintas técnicas diagnóstico existentes, con sus limitaciones y sus riesgos;</li>
+<li><strong>y consulta postest</strong>: en donde se asesora sobre el resultado del estudio, y se realiza asesoramiento genético reproductivo, individual y familiar, independientemente del resultado positivo o negativo del estudio.</li>
+</ul>
+
+<p>Estas consultas de asesoramiento en ningún momento sustituyen a la consulta de Genética Médica que requieren de la formación de un titulado en Medicina ya que contemplan la exploración e interpretación de pruebas diagnósticas de imagen, entre otras. El asesoramiento genético pretest y postest es complementario al anterior.</p>
+
+<p class="section-title"><strong>FUNDAMENTOS JURÍDICOS, ÉTICOS Y TÉCNICOS</strong></p>
+
+<p><strong>1. Reconocimiento normativo del asesoramiento genético</strong></p>
+
+<ul class="bullet-list">
+<li><strong>El artículo 10.5 de la Ley 14/2007, de Investigación Biomédica (LIB)</strong> establece que "toda persona que se someta a un análisis genético tendrá derecho a recibir asesoramiento genético antes y después de la realización del mismo", definiendo dicho asesoramiento como el proceso de información y acompañamiento que permite tomar decisiones informadas sobre su salud genética, sin dejar especificado que sea exclusivo de los facultativos médicos.</li>
+<li><strong>El Real Decreto 1011/2009, de 19 de junio</strong>, por el que se regula la cartera de servicios comunes del SNS, incluye expresamente dentro de las prestaciones genéticas la "información, consejo y apoyo a las personas afectadas y sus familias" como parte integral del proceso diagnóstico, sin dejar especificado que sea exclusivo de los facultativos médicos.</li>
+<li><strong>La Ley 41/2002, básica reguladora de la autonomía del paciente</strong>, también subraya el deber de garantizar una información comprensible, suficiente y personalizada en todos los actos sanitarios, especialmente en los procesos complejos como los que implican riesgo genético, con implicaciones familiares y reproductivas.</li>
+</ul>
+
+<p><strong>2. Marco europeo y ético en medicina genómica</strong></p>
+
+<ul class="bullet-list">
+<li><strong>La Guía sobre las aplicaciones de la medicina genómica en los sistemas sanitarios europeos (Consejo de Europa, 2022)</strong> destaca que el asesoramiento genético debe formar parte de los estándares asistenciales en cualquier proceso de diagnóstico o cribado genético, sin dejar especificado que sea exclusivo de los facultativos médicos. De hecho, es una actividad multidisciplinar en la que intervienen distintos profesionales sanitarios.</li>
+<li><strong>Asimismo, la Recomendación del Consejo de la Unión Europea de 8 de diciembre de 2023</strong> sobre el uso del genoma humano en los sistemas sanitarios establece como objetivo prioritario la formación de especialistas en genética capaces de integrar el asesoramiento genético en los servicios clínicos, especialmente en el marco de la medicina personalizada de precisión.</li>
+</ul>
+
+<p><strong>3. Importancia clínica y bioética</strong></p>
+
+<p>El asesoramiento genético es esencial no sólo desde el punto de vista clínico, sino también desde una perspectiva <strong>bioética, de equidad en el acceso y respeto a los derechos del paciente</strong>. Su exclusión del texto actual debilita la dimensión clínica y humana de la genética médica, relegando la especialidad a una visión meramente técnica, en contradicción con la medicina centrada en la persona que promueve el SNS.</p>
+
+<p class="section-title"><strong>PROPUESTA CONCRETA DE REDACCIÓN ADICIONAL:</strong></p>
+
+<p>Se propone añadir el siguiente texto en el apartado de objetivos o competencias de la futura especialidad:</p>
+
+<p style="font-style: italic; margin-left: 20px; padding: 10px; background-color: #f8f9fa; border-left: 4px solid #0056b3;">"<strong>Incluir como competencia específica el asesoramiento genético a pacientes y familias</strong>, en coordinación con profesionales de la salud, garantizando una información adecuada, comprensible y éticamente responsable en todos los procesos de análisis genético, conforme a la legislación vigente sobre derechos sanitarios y medicina genómica."</p>
+
+<p class="section-title"><strong>CONCLUSIÓN:</strong></p>
+
+<p>El reconocimiento formal del <strong>asesoramiento genético</strong> como competencia de la especialidad en Genética de Laboratorio es indispensable para garantizar la correcta implementación de la medicina genómica en el SNS, cumpliendo la legislación nacional, los compromisos europeos y los principios bioéticos esenciales.</p>
+
+<p>Por tanto, solicito que esta aportación sea tenida en cuenta en la elaboración de la norma reguladora.</p>
+
+<p>Atentamente,</p>
+
+<p><span class="form-data">${formData.nombre}</span></p>
+</div>`;
+        }
+
+        /**
+         * Genera el contenido en texto plano para fallback del clipboard
+         */
+        function generatePlainTextContent() {
+            const formData = {
+                nombre: document.getElementById('userName').value,
+                dni: document.getElementById('userDNI').value,
+                email: document.getElementById('userEmail').value,
+                telefono: document.getElementById('userPhone').value,
+                fecha: document.getElementById('userDate').value
+            };
+            
+            return `ESCRITO DE APORTACIÓN AL TRÁMITE DE CONSULTA PÚBLICA PREVIA
+
+Asunto: Alegaciones al trámite de consulta pública para la creación de la especialidad en Genética de Laboratorio.
+
+Persona remitente:
+NOMBRE COMPLETO (obligatorio):
+${formData.nombre}
+DNI/NIE (obligatorio):
+${formData.dni}
+Correo electrónico de contacto (obligatorio):
+${formData.email}
+${formData.telefono ? `Teléfono de contacto (opcional):\n${formData.telefono}` : ''}
+
+Órgano destinatario:
+Dirección General de Ordenación Profesional
+Ministerio de Sanidad
+
+Fecha:
+${formData.fecha}
+
+EXPONE:
+
+En el contexto de la consulta pública previa sobre la futura regulación de la especialidad de Genética de Laboratorio, deseo realizar las siguientes alegaciones y propuestas, con el objetivo de reforzar el enfoque asistencial, ético y normativo de la medicina genómica en el Sistema Nacional de Salud (SNS):
+
+PROPUESTA DE INCLUSIÓN DEL ASESORAMIENTO GENÉTICO COMO COMPETENCIA ESPECÍFICA
+
+Solicito que se incluya explícitamente el "asesoramiento genético" como una de las competencias fundamentales de la especialidad en Genética de Laboratorio, en tanto que constituye un componente esencial del proceso asistencial en enfermedades genéticas, y forma parte inseparable del ciclo clínico del diagnóstico molecular en medicina genómica. El asesoramiento genético a su vez, al menos tiene que contemplar:
+
+• una consulta pretest, en la que se recoge el árbol genealógico, se explica las características feno-genotípicas de la enfermedad a estudio y las distintas técnicas diagnóstico existentes, con sus limitaciones y sus riesgos;
+
+• y consulta postest: en donde se asesora sobre el resultado del estudio, y se realiza asesoramiento genético reproductivo, individual y familiar, independientemente del resultado positivo o negativo del estudio.
+
+Estas consultas de asesoramiento en ningún momento sustituyen a la consulta de Genética Médica que requieren de la formación de un titulado en Medicina ya que contemplan la exploración e interpretación de pruebas diagnósticas de imagen, entre otras. El asesoramiento genético pretest y postest es complementario al anterior.
+
+FUNDAMENTOS JURÍDICOS, ÉTICOS Y TÉCNICOS
+
+1. Reconocimiento normativo del asesoramiento genético
+
+• El artículo 10.5 de la Ley 14/2007, de Investigación Biomédica (LIB) establece que "toda persona que se someta a un análisis genético tendrá derecho a recibir asesoramiento genético antes y después de la realización del mismo", definiendo dicho asesoramiento como el proceso de información y acompañamiento que permite tomar decisiones informadas sobre su salud genética, sin dejar especificado que sea exclusivo de los facultativos médicos.
+
+• El Real Decreto 1011/2009, de 19 de junio, por el que se regula la cartera de servicios comunes del SNS, incluye expresamente dentro de las prestaciones genéticas la "información, consejo y apoyo a las personas afectadas y sus familias" como parte integral del proceso diagnóstico, sin dejar especificado que sea exclusivo de los facultativos médicos.
+
+• La Ley 41/2002, básica reguladora de la autonomía del paciente, también subraya el deber de garantizar una información comprensible, suficiente y personalizada en todos los actos sanitarios, especialmente en los procesos complejos como los que implican riesgo genético, con implicaciones familiares y reproductivas.
+
+2. Marco europeo y ético en medicina genómica
+
+• La Guía sobre las aplicaciones de la medicina genómica en los sistemas sanitarios europeos (Consejo de Europa, 2022) destaca que el asesoramiento genético debe formar parte de los estándares asistenciales en cualquier proceso de diagnóstico o cribado genético, sin dejar especificado que sea exclusivo de los facultativos médicos. De hecho, es una actividad multidisciplinar en la que intervienen distintos profesionales sanitarios.
+
+• Asimismo, la Recomendación del Consejo de la Unión Europea de 8 de diciembre de 2023 sobre el uso del genoma humano en los sistemas sanitarios establece como objetivo prioritario la formación de especialistas en genética capaces de integrar el asesoramiento genético en los servicios clínicos, especialmente en el marco de la medicina personalizada de precisión.
+
+3. Importancia clínica y bioética
+
+El asesoramiento genético es esencial no sólo desde el punto de vista clínico, sino también desde una perspectiva bioética, de equidad en el acceso y respeto a los derechos del paciente. Su exclusión del texto actual debilita la dimensión clínica y humana de la genética médica, relegando la especialidad a una visión meramente técnica, en contradicción con la medicina centrada en la persona que promueve el SNS.
+
+PROPUESTA CONCRETA DE REDACCIÓN ADICIONAL:
+
+Se propone añadir el siguiente texto en el apartado de objetivos o competencias de la futura especialidad:
+
+"Incluir como competencia específica el asesoramiento genético a pacientes y familias, en coordinación con profesionales de la salud, garantizando una información adecuada, comprensible y éticamente responsable en todos los procesos de análisis genético, conforme a la legislación vigente sobre derechos sanitarios y medicina genómica."
+
+CONCLUSIÓN:
+
+El reconocimiento formal del asesoramiento genético como competencia de la especialidad en Genética de Laboratorio es indispensable para garantizar la correcta implementación de la medicina genómica en el SNS, cumpliendo la legislación nacional, los compromisos europeos y los principios bioéticos esenciales.
+
+Por tanto, solicito que esta aportación sea tenida en cuenta en la elaboración de la norma reguladora.
+
+Atentamente,
+
+${formData.nombre}`;
+        }
+
+
+
+        /**
+         * Genera el contenido HTML formateado para copiar (sin estilos azules)
+         */
+        function generateFormattedHTMLContent() {
+            // Determinar saludo según la hora
+            const now = new Date();
+            const hour = now.getHours();
+            let greeting = "Hola"; // Valor por defecto
+            
+            if (hour >= 6 && hour < 14) {
+                greeting = "Buenos días";
+            } else if (hour >= 14 && hour < 21) {
+                greeting = "Buenas tardes";
+            } else {
+                greeting = "Hola";
+            }
+            
+            const formData = {
+                nombre: document.getElementById('userName').value,
+                dni: document.getElementById('userDNI').value,
+                email: document.getElementById('userEmail').value,
+                telefono: document.getElementById('userPhone').value,
+                fecha: document.getElementById('userDate').value
+            };
+            
+            return `<p><strong>ESCRITO DE APORTACIÓN AL TRÁMITE DE CONSULTA PÚBLICA PREVIA</strong></p>
+
+<p><strong>Asunto:</strong> Alegaciones al trámite de consulta pública para la creación de la especialidad en Genética de Laboratorio.</p>
+
+<p><strong>Persona remitente:</strong></p>
+<p><strong>NOMBRE COMPLETO (obligatorio):</strong></p>
+<p><strong>${formData.nombre}</strong></p>
+<p><strong>DNI/NIE (obligatorio):</strong></p>
+<p><strong>${formData.dni}</strong></p>
+<p><strong>Correo electrónico de contacto (obligatorio):</strong></p>
+<p><strong>${formData.email}</strong></p>
+${formData.telefono ? `<p><strong>Teléfono de contacto (opcional):</strong></p><p><strong>${formData.telefono}</strong></p>` : ''}
+
+<p><strong>Órgano destinatario:</strong></p>
+<p>Dirección General de Ordenación Profesional</p>
+<p>Ministerio de Sanidad</p>
+
+<p><strong>Fecha:</strong></p>
+<p><strong>${formData.fecha}</strong></p>
+
+<p><strong>EXPONE:</strong></p>
+
+<p>En el contexto de la consulta pública previa sobre la futura regulación de la especialidad de Genética de Laboratorio, deseo realizar las siguientes alegaciones y propuestas, con el objetivo de reforzar el enfoque asistencial, ético y normativo de la medicina genómica en el Sistema Nacional de Salud (SNS):</p>
+
+<p><strong>PROPUESTA DE INCLUSIÓN DEL ASESORAMIENTO GENÉTICO COMO COMPETENCIA ESPECÍFICA</strong></p>
+
+<p>Solicito que se <strong>incluya explícitamente el "asesoramiento genético"</strong> como una de las competencias fundamentales de la especialidad en Genética de Laboratorio, en tanto que constituye un componente esencial del proceso asistencial en enfermedades genéticas, y forma parte inseparable del ciclo clínico del diagnóstico molecular en medicina genómica. El asesoramiento genético a su vez, al menos tiene que contemplar:</p>
+
+<ul>
+<li><strong>una consulta pretest</strong>, en la que se recoge el árbol genealógico, se explica las características feno-genotípicas de la enfermedad a estudio y las distintas técnicas diagnóstico existentes, con sus limitaciones y sus riesgos;</li>
+<li><strong>y consulta postest</strong>: en donde se asesora sobre el resultado del estudio, y se realiza asesoramiento genético reproductivo, individual y familiar, independientemente del resultado positivo o negativo del estudio.</li>
+</ul>
+
+<p>Estas consultas de asesoramiento en ningún momento sustituyen a la consulta de Genética Médica que requieren de la formación de un titulado en Medicina ya que contemplan la exploración e interpretación de pruebas diagnósticas de imagen, entre otras. El asesoramiento genético pretest y postest es complementario al anterior.</p>
+
+<p><strong>FUNDAMENTOS JURÍDICOS, ÉTICOS Y TÉCNICOS</strong></p>
+
+<p><strong>1. Reconocimiento normativo del asesoramiento genético</strong></p>
+
+<ul>
+<li><strong>El artículo 10.5 de la Ley 14/2007, de Investigación Biomédica (LIB)</strong> establece que "toda persona que se someta a un análisis genético tendrá derecho a recibir asesoramiento genético antes y después de la realización del mismo", definiendo dicho asesoramiento como el proceso de información y acompañamiento que permite tomar decisiones informadas sobre su salud genética, sin dejar especificado que sea exclusivo de los facultativos médicos.</li>
+<li><strong>El Real Decreto 1011/2009, de 19 de junio</strong>, por el que se regula la cartera de servicios comunes del SNS, incluye expresamente dentro de las prestaciones genéticas la "información, consejo y apoyo a las personas afectadas y sus familias" como parte integral del proceso diagnóstico, sin dejar especificado que sea exclusivo de los facultativos médicos.</li>
+<li><strong>La Ley 41/2002, básica reguladora de la autonomía del paciente</strong>, también subraya el deber de garantizar una información comprensible, suficiente y personalizada en todos los actos sanitarios, especialmente en los procesos complejos como los que implican riesgo genético, con implicaciones familiares y reproductivas.</li>
+</ul>
+
+<p><strong>2. Marco europeo y ético en medicina genómica</strong></p>
+
+<ul>
+<li><strong>La Guía sobre las aplicaciones de la medicina genómica en los sistemas sanitarios europeos (Consejo de Europa, 2022)</strong> destaca que el asesoramiento genético debe formar parte de los estándares asistenciales en cualquier proceso de diagnóstico o cribado genético, sin dejar especificado que sea exclusivo de los facultativos médicos. De hecho, es una actividad multidisciplinar en la que intervienen distintos profesionales sanitarios.</li>
+<li><strong>Asimismo, la Recomendación del Consejo de la Unión Europea de 8 de diciembre de 2023</strong> sobre el uso del genoma humano en los sistemas sanitarios establece como objetivo prioritario la formación de especialistas en genética capaces de integrar el asesoramiento genético en los servicios clínicos, especialmente en el marco de la medicina personalizada de precisión.</li>
+</ul>
+
+<p><strong>3. Importancia clínica y bioética</strong></p>
+
+<p>El asesoramiento genético es esencial no sólo desde el punto de vista clínico, sino también desde una perspectiva <strong>bioética, de equidad en el acceso y respeto a los derechos del paciente</strong>. Su exclusión del texto actual debilita la dimensión clínica y humana de la genética médica, relegando la especialidad a una visión meramente técnica, en contradicción con la medicina centrada en la persona que promueve el SNS.</p>
+
+<p><strong>PROPUESTA CONCRETA DE REDACCIÓN ADICIONAL:</strong></p>
+
+<p>Se propone añadir el siguiente texto en el apartado de objetivos o competencias de la futura especialidad:</p>
+
+<p><em>"<strong>Incluir como competencia específica el asesoramiento genético a pacientes y familias</strong>, en coordinación con profesionales de la salud, garantizando una información adecuada, comprensible y éticamente responsable en todos los procesos de análisis genético, conforme a la legislación vigente sobre derechos sanitarios y medicina genómica."</em></p>
+
+<p><strong>CONCLUSIÓN:</strong></p>
+
+<p>El reconocimiento formal del <strong>asesoramiento genético</strong> como competencia de la especialidad en Genética de Laboratorio es indispensable para garantizar la correcta implementación de la medicina genómica en el SNS, cumpliendo la legislación nacional, los compromisos europeos y los principios bioéticos esenciales.</p>
+
+<p>Por tanto, solicito que esta aportación sea tenida en cuenta en la elaboración de la norma reguladora.</p>
+
+<p>Atentamente,</p>
+
+<p><strong>${formData.nombre}</strong></p>`;
+        }
+
+        /**
+         * Actualiza el indicador de progreso
+         */
+        function updateProgressIndicator() {
+            PROGRESS_STEPS.forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index < currentStep) {
+                    step.classList.add('completed');
+                } else if (index === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        /**
+         * Muestra el paso especificado
+         */
+        function showStep(index) {
+            STEPS.forEach((step, i) => {
+                step.classList.toggle('active', i === index);
+            });
+            
+            updateProgressIndicator();
+            
+            // Actualizar botones de navegación
+            PREV_BTN.style.display = index === 0 ? 'none' : 'inline-block';
+            NEXT_BTN.style.display = index === STEPS.length - 1 ? 'none' : 'inline-block';
+            
+            // Generar contenido en el paso 2
+            if (index === 1) {
+                CONTENT_AREA.innerHTML = generateContent();
+                // Resetear estado de copiado si se vuelve al paso 2
+                documentCopied = false;
+                const copyBtn = document.getElementById('btn-copy');
+                copyBtn.classList.add('btn-copy-highlight');
+            }
+            
+            // Configurar event listeners para el paso 3
+            if (index === 2) {
+                setupStep3EventListeners();
+            }
+        }
+
+        /**
+         * Valida el formulario
+         */
+        function validateForm() {
+            return DATA_FORM.reportValidity();
+        }
+
+        /**
+         * Detecta si es un dispositivo móvil
+         */
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+
+
+        /**
+         * Abre el cliente de correo especificado
+         */
+        function openEmailClient(provider) {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            
+            // Mostrar indicador de carga
+            loadingIndicator.classList.add('show');
+            
+            const isMobile = isMobileDevice();
+            const encodedSubject = encodeURIComponent(EMAIL_CONFIG.subject);
+            const encodedRecipient = encodeURIComponent(EMAIL_CONFIG.recipient);
+            
+            let urls;
+            
+            if (isMobile) {
+                // URLs para móviles (solo destinatario y asunto)
+                urls = {
+                    gmail: `googlegmail://co?to=${encodedRecipient}&subject=${encodedSubject}`,
+                    outlook: `ms-outlook://compose?to=${encodedRecipient}&subject=${encodedSubject}`
+                };
+            } else {
+                // URLs para desktop (solo destinatario y asunto)
+                urls = {
+                    gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodedRecipient}&su=${encodedSubject}`,
+                    outlook: `https://outlook.live.com/mail/0/deeplink/compose?to=${encodedRecipient}&subject=${encodedSubject}`
+                };
+            }
+            
+            // Abrir enlace después de un breve delay para mostrar el indicador
+            setTimeout(() => {
+                const url = urls[provider];
+                
+                if (isMobile) {
+                    // Estrategia simplificada para móviles
+                    tryMobileEmailOpen(provider, url);
+                } else {
+                    window.open(url, '_blank');
+                }
+                
+                // Ocultar indicador después de un tiempo
+                setTimeout(() => {
+                    loadingIndicator.classList.remove('show');
+                }, 1500);
+            }, 300);
+        }
+
+        /**
+         * Intenta abrir el cliente de email en móviles con método simplificado
+         */
+        function tryMobileEmailOpen(provider, appUrl) {
+            // Método 1: Intentar abrir app nativa directamente
+            try {
+                window.location.href = appUrl;
+            } catch (e) {
+                console.log('Error opening native app:', e);
+            }
+            
+            // Método 2: Fallback a versión web después de 2 segundos
+            setTimeout(() => {
+                const encodedSubject = encodeURIComponent(EMAIL_CONFIG.subject);
+                const encodedRecipient = encodeURIComponent(EMAIL_CONFIG.recipient);
+                
+                const webUrls = {
+                    gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodedRecipient}&su=${encodedSubject}`,
+                    outlook: `https://outlook.live.com/mail/0/deeplink/compose?to=${encodedRecipient}&subject=${encodedSubject}`
+                };
+                
+                window.open(webUrls[provider], '_blank');
+            }, 2000);
+        }
+
+        // Event listeners
+        NEXT_BTN.addEventListener('click', () => {
+            if (currentStep === 0 && !validateForm()) return;
+            
+            // Verificar si se ha copiado el documento antes de avanzar al paso 3
+            if (currentStep === 1 && !documentCopied) {
+                showCopyWarning();
+                return;
+            }
+            
+            if (currentStep < STEPS.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        PREV_BTN.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        GMAIL_BTN.addEventListener('click', () => openEmailClient('gmail'));
+        OUTLOOK_BTN.addEventListener('click', () => openEmailClient('outlook'));
+
+        // Event listeners para botones de acción del documento
+        COPY_BTN.addEventListener('click', copyToClipboard);
+        COPY_HTML_BTN.addEventListener('click', copyHTMLToClipboard);
+
+        /**
+         * Muestra un aviso cuando el usuario intenta avanzar sin copiar
+         */
+        function showCopyWarning() {
+            const copyBtn = document.getElementById('btn-copy');
+            const originalText = copyBtn.textContent;
+            
+            // Mostrar mensaje de aviso
+            copyBtn.textContent = '⚠️ Debes copiar el documento primero';
+            copyBtn.style.backgroundColor = '#dc3545';
+            copyBtn.style.animation = 'shake 0.5s';
+            
+            // Restaurar después de 3 segundos
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.backgroundColor = '';
+                copyBtn.style.animation = '';
+            }, 3000);
+        }
+
+        /**
+         * Copia el contenido al portapapeles para pegar manualmente
+         */
+        async function copyHTMLToClipboard() {
+            try {
+                const htmlContent = generateFormattedHTMLContent();
+                const plainContent = generatePlainTextContent();
+                
+                // Usar la API moderna de clipboard que soporta HTML
+                if (navigator.clipboard && navigator.clipboard.write) {
+                    const clipboardItem = new ClipboardItem({
+                        'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                        'text/plain': new Blob([plainContent], { type: 'text/plain' })
+                    });
+                    await navigator.clipboard.write([clipboardItem]);
+                } else {
+                    // Fallback a solo texto plano
+                    await navigator.clipboard.writeText(plainContent);
+                }
+                
+                // Marcar como copiado
+                documentCopied = true;
+                
+                // Mostrar feedback visual
+                const originalText = COPY_HTML_BTN.textContent;
+                COPY_HTML_BTN.textContent = '✓ Copiado con Formato';
+                COPY_HTML_BTN.style.backgroundColor = '#28a745';
+                setTimeout(() => {
+                    COPY_HTML_BTN.textContent = originalText;
+                    COPY_HTML_BTN.style.backgroundColor = '';
+                }, 3000);
+            } catch (err) {
+                console.error('Error copying to clipboard:', err);
+                // Fallback manual
+                const textArea = document.createElement('textarea');
+                textArea.value = generatePlainTextContent();
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Marcar como copiado
+                documentCopied = true;
+                
+                // Mostrar feedback visual
+                const originalText = COPY_HTML_BTN.textContent;
+                COPY_HTML_BTN.textContent = '✓ Copiado';
+                COPY_HTML_BTN.style.backgroundColor = '#28a745';
+                setTimeout(() => {
+                    COPY_HTML_BTN.textContent = originalText;
+                    COPY_HTML_BTN.style.backgroundColor = '';
+                }, 3000);
+            }
+        }
+
+        /**
+         * Copia el contenido formateado al portapapeles (desde el previsualizador)
+         */
+        async function copyToClipboard() {
+            try {
+                const htmlContent = generateFormattedHTMLContent();
+                const plainContent = generatePlainTextContent();
+                
+                // Usar la API moderna de clipboard que soporta HTML
+                if (navigator.clipboard && navigator.clipboard.write) {
+                    const clipboardItem = new ClipboardItem({
+                        'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                        'text/plain': new Blob([plainContent], { type: 'text/plain' })
+                    });
+                    await navigator.clipboard.write([clipboardItem]);
+                } else {
+                    // Fallback a solo texto plano
+                    await navigator.clipboard.writeText(plainContent);
+                }
+                
+                // Marcar como copiado
+                documentCopied = true;
+                
+                // Mostrar feedback visual
+                const originalText = COPY_BTN.textContent;
+                COPY_BTN.textContent = '✓ Copiado con Formato';
+                COPY_BTN.style.backgroundColor = '#28a745';
+                COPY_BTN.classList.remove('btn-copy-highlight');
+                setTimeout(() => {
+                    COPY_BTN.textContent = originalText;
+                    COPY_BTN.style.backgroundColor = '';
+                }, 2000);
+            } catch (err) {
+                console.error('Error copying to clipboard:', err);
+                // Fallback para navegadores que no soportan clipboard API
+                const textArea = document.createElement('textarea');
+                textArea.value = generatePlainTextContent();
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Marcar como copiado
+                documentCopied = true;
+                
+                // Mostrar feedback visual
+                const originalText = COPY_BTN.textContent;
+                COPY_BTN.textContent = '✓ Copiado';
+                COPY_BTN.style.backgroundColor = '#28a745';
+                COPY_BTN.classList.remove('btn-copy-highlight');
+                setTimeout(() => {
+                    COPY_BTN.textContent = originalText;
+                    COPY_BTN.style.backgroundColor = '';
+                }, 2000);
+            }
+        }
+
+        /**
+         * Configura los event listeners para el paso 3
+         */
+        function setupStep3EventListeners() {
+            const copyRecipientBtn = document.getElementById('copyRecipientBtn');
+            const copySubjectBtn = document.getElementById('copySubjectBtn');
+            
+            if (copyRecipientBtn) {
+                copyRecipientBtn.addEventListener('click', copyRecipient);
+            }
+            if (copySubjectBtn) {
+                copySubjectBtn.addEventListener('click', copySubject);
+            }
+        }
+
+        /**
+         * Copia el email del destinatario al portapapeles
+         */
+        async function copyRecipient() {
+            const copyRecipientBtn = document.getElementById('copyRecipientBtn');
+            try {
+                await navigator.clipboard.writeText(EMAIL_CONFIG.recipient);
+                showCopyFeedback(copyRecipientBtn, '✓');
+            } catch (err) {
+                // Fallback manual
+                const textArea = document.createElement('textarea');
+                textArea.value = EMAIL_CONFIG.recipient;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyFeedback(copyRecipientBtn, '✓');
+            }
+        }
+
+        /**
+         * Copia el asunto al portapapeles
+         */
+        async function copySubject() {
+            const copySubjectBtn = document.getElementById('copySubjectBtn');
+            try {
+                await navigator.clipboard.writeText(EMAIL_CONFIG.subject);
+                showCopyFeedback(copySubjectBtn, '✓');
+            } catch (err) {
+                // Fallback manual
+                const textArea = document.createElement('textarea');
+                textArea.value = EMAIL_CONFIG.subject;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyFeedback(copySubjectBtn, '✓');
+            }
+        }
+
+        /**
+         * Muestra feedback visual para botones pequeños de copiar
+         */
+        function showCopyFeedback(button, text) {
+            const originalText = button.textContent;
+            button.textContent = text;
+            button.style.backgroundColor = '#28a745';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.backgroundColor = '';
+            }, 1500);
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            showStep(currentStep);
+            
+            // Establecer fecha actual por defecto
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('userDate').value = today;
+            
+            // Mejoras específicas para móviles
+            setupMobileOptimizations();
+        });
+
+        /**
+         * Configuraciones específicas para dispositivos móviles
+         */
+        function setupMobileOptimizations() {
+            // Detectar si es un dispositivo móvil
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Prevenir zoom en inputs en iOS
+                const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
+                inputs.forEach(input => {
+                    input.addEventListener('focus', () => {
+                        const viewport = document.querySelector('meta[name="viewport"]');
+                        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+                    });
+                    
+                    input.addEventListener('blur', () => {
+                        const viewport = document.querySelector('meta[name="viewport"]');
+                        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                    });
+                });
+
+                // Scroll suave al cambiar de paso
+                const originalShowStep = showStep;
+                showStep = function(index) {
+                    originalShowStep(index);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+
+                // Manejar cambios de orientación
+                window.addEventListener('orientationchange', () => {
+                    setTimeout(() => {
+                        window.scrollTo(0, 0);
+                    }, 100);
+                });
+
+                // Optimizar el teclado virtual
+                window.addEventListener('resize', () => {
+                    const activeElement = document.activeElement;
+                    if (activeElement && activeElement.tagName === 'INPUT') {
+                        setTimeout(() => {
+                            activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 300);
+                    }
+                });
+            }
+
+            // Navegación con gestos (swipe)
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            document.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const swipeDistance = touchEndX - touchStartX;
+                
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0 && currentStep > 0) {
+                        // Swipe derecha - paso anterior
+                        currentStep--;
+                        showStep(currentStep);
+                    } else if (swipeDistance < 0 && currentStep < STEPS.length - 1) {
+                        // Swipe izquierda - siguiente paso
+                        if (currentStep === 0 && !validateForm()) return;
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
